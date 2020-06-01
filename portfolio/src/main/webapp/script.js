@@ -32,3 +32,10 @@ async function addHello() {
     const text = await hello.text();
     document.getElementById('hello-message').innerText = text;
 }
+
+function getQuotes() {
+    fetch('/data').then(response => response.json()).then((Quotes) => {
+        console.log(Quotes);
+        document.getElementById('hello-message').innerText = JSON.stringify(Quotes);
+    });
+}
