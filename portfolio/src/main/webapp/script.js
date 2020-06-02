@@ -12,6 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+function getComments() {
+    fetch('/data').then(response => response.json()).then((comment) => {
+        const commentEl = document.getElementById('comments');
+        console.log(comment);
+        comment.forEach((line) => {
+            commentEl.appendChild(createListElement(line));
+        });
+    });
+}
+
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
+}
+
+
 /**
  * Adds a random greeting to the page.
  */

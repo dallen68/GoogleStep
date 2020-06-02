@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body class="body">
+  <body class="body" onload="getComments()">
       <div class="navigationbar">
           <a href="index.html">Home</a>
           <a>About Me</a>
@@ -23,10 +23,19 @@
       <h1>My Portfolio.</h1>
       <p>This is Dante Allen's portfolio.Hello</p>
       <img class="picture" src ="images/DanteGoogle.jpg">
-      <div id="hello-message"></div>
-      <p>Click here to get a random message:</p>
-      <button onclick="getQuotes()">Hello</button>
-      <div id="greeting-container">greet</div>
+
+      <h1 id="comment-header">Leave a comment below!</h1>
+      <ul id="comments"></ul>
+
+      <form action="/data" method="POST">
+        <p>Name:</p>
+        <input type="text" name="name">
+        <p>Comment:</p>
+        <textarea name="comment"> </textarea>
+        <br/>
+        <input type="submit"/>
+      </form>
+
     </div>
   </body>
 </html>
