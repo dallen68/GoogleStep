@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.lang.Integer;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
@@ -35,14 +36,19 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
-
+    int count = Integer.parseInt(request.getParameter("count"));
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
     ArrayList<String> comments = new ArrayList<>();
+    int counter = 0;
     for (Entity entity : results.asIterable()) {
-      String comment = (String) entity.getProperty("comment");
-      comments.add(comment);
+        if (counter < count) {
+            String comment = (String) entity.getProperty("comment");
+            comments.add(comment);
+            counter++;
+        }
+      
     }
 
     

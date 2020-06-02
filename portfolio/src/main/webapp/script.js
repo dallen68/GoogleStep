@@ -13,9 +13,12 @@
 // limitations under the License.
 
 function getComments() {
-    fetch('/data').then(response => response.json()).then((comment) => {
+    var commentCount = document.getElementById('commentCount').value;
+    fetch('/data?count='+ commentCount).then(response => response.json()).then((comment) => {
         const commentEl = document.getElementById('comments');
         console.log(comment);
+        console.log(commentCount);
+        commentEl.innerHTML = '';
         comment.forEach((line) => {
             commentEl.appendChild(createListElement(line));
         });
