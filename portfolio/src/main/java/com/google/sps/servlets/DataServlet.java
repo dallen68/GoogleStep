@@ -44,7 +44,6 @@ public class DataServlet extends HttpServlet {
       String comment = entity.getProperty("comment");
       comments.add(comment);
     }
-
     
     response.setContentType("application/json");
     String json = new Gson().toJson(comments);
