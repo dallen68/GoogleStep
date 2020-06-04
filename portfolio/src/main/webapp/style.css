@@ -63,3 +63,7 @@
     padding-bottom: 20px;
     float: right;
 }
+
+#hello-message {
+    color: red;
+}

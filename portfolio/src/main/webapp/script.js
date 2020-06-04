@@ -12,6 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+function getComments() {
+    fetch('/data').then(response => response.json()).then((comment) => {
+        const commentEl = document.getElementById('comments');
+        console.log(comment);
+        comment.forEach((line) => {
+            commentEl.appendChild(createListElement(line));
+        });
+    });
+}
+
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
+}
+
+
 /**
  * Adds a random greeting to the page.
  */
@@ -25,4 +42,17 @@ function addRandomGreeting() {
   // Add it to the page.
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
+}
+
+async function addHello() {
+    const hello = await fetch('/data');
+    const text = await hello.text();
+    document.getElementById('hello-message').innerText = text;
+}
+
+function getQuotes() {
+    fetch('/data').then(response => response.json()).then((Quotes) => {
+        console.log(Quotes);
+        document.getElementById('hello-message').innerText = JSON.stringify(Quotes);
+    });
 }
