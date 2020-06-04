@@ -28,6 +28,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.lang.Integer;
+import java.util.List;
+
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
@@ -35,12 +37,14 @@ public class DataServlet extends HttpServlet {
     
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    //Query the datastore for comments
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+
     int count = Integer.parseInt(request.getParameter("count"));
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
-    ArrayList<String> comments = new ArrayList<>();
+    List<String> comments = new ArrayList<>();
     int counter = 0;
     for (Entity entity : results.asIterable()) {
         if (counter < count) {
@@ -50,7 +54,6 @@ public class DataServlet extends HttpServlet {
         }
       
     }
-
     
     response.setContentType("application/json");
     String json = new Gson().toJson(comments);
@@ -71,9 +74,3 @@ public class DataServlet extends HttpServlet {
       response.sendRedirect("index.html");
   }
 }
-
-//   private String convertToJsonUsingGson(ArrayList quote) {
-//     Gson gson = new Gson();
-//     String json = gson.toJson(quote);
-//     return json;
-//   }
