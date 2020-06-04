@@ -43,7 +43,8 @@ public class DataServlet extends HttpServlet {
     int count = Integer.parseInt(request.getParameter("count"));
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
-
+      
+    //Iterate through query results and add entities to List
     List<String> comments = new ArrayList<>();
     int counter = 0;
     for (Entity entity : results.asIterable()) {
