@@ -25,37 +25,15 @@ function getComments() {
     });
 }
 
+function deleteComments() {
+    fetch('/delete-comment', {method: 'POST'});
+    console.log("it made it here");
+    getComments();
+}
+
 function createListElement(text) {
   const liElement = document.createElement('li');
   liElement.innerText = text;
   return liElement;
 }
 
-
-/**
- * Adds a random greeting to the page.
- */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
-}
-
-async function addHello() {
-    const hello = await fetch('/data');
-    const text = await hello.text();
-    document.getElementById('hello-message').innerText = text;
-}
-
-function getQuotes() {
-    fetch('/data').then(response => response.json()).then((Quotes) => {
-        console.log(Quotes);
-        document.getElementById('hello-message').innerText = JSON.stringify(Quotes);
-    });
-}
