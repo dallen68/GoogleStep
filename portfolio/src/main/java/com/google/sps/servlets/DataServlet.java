@@ -27,24 +27,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.lang.Integer;
 import java.util.List;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/data")
+/**Servlet that handles comments **/
+@WebServlet("/comments")
 public class DataServlet extends HttpServlet {
     
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     //Query the datastore for comments
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
-    
+
+    int count = Integer.parseInt(request.getParameter("count"));
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
-    //Iterate through datastore and add comments to list
+      
+    //Iterate through query results and add entities to List
     List<String> comments = new ArrayList<>();
+    int counter = 0;
     for (Entity entity : results.asIterable()) {
-      String comment = entity.getProperty("comment");
-      comments.add(comment);
+        if (counter < count) {
+            String comment = (String) entity.getProperty("comment");
+            comments.add(comment);
+            counter++;
+        }
+      
     }
     
     response.setContentType("application/json");

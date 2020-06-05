@@ -13,13 +13,22 @@
 // limitations under the License.
 
 function getComments() {
-    fetch('/data').then(response => response.json()).then((comment) => {
+    var commentCount = document.getElementById('commentCount').value;
+    fetch('/comments?count='+ commentCount).then(response => response.json()).then((comment) => {
         const commentEl = document.getElementById('comments');
         console.log(comment);
+        console.log(commentCount);
+        commentEl.innerHTML = '';
         comment.forEach((line) => {
             commentEl.appendChild(createListElement(line));
         });
     });
+}
+
+function deleteComments() {
+    fetch('/delete-comments', {method: 'POST'});
+    console.log("it made it here");
+    getComments();
 }
 
 function createListElement(text) {
@@ -28,31 +37,3 @@ function createListElement(text) {
   return liElement;
 }
 
-
-/**
- * Adds a random greeting to the page.
- */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
-}
-
-async function addHello() {
-    const hello = await fetch('/data');
-    const text = await hello.text();
-    document.getElementById('hello-message').innerText = text;
-}
-
-function getQuotes() {
-    fetch('/data').then(response => response.json()).then((Quotes) => {
-        console.log(Quotes);
-        document.getElementById('hello-message').innerText = JSON.stringify(Quotes);
-    });
-}

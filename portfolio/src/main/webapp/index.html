@@ -23,18 +23,17 @@
       <h1>My Portfolio.</h1>
       <p>This is Dante Allen's portfolio.Hello</p>
       <img class="picture" src ="images/DanteGoogle.jpg">
-
+      <input type="number" id="commentCount" name="commentCount" value="2" min="0" onchange="getComments()">
       <h1 id="comment-header">Leave a comment below!</h1>
       <ul id="comments"></ul>
 
-      <form action="/data" method="POST">
-        <p>Name:</p>
-        <input type="text" name="name">
+      <form action="/comments" method="POST">
         <p>Comment:</p>
         <textarea name="comment"> </textarea>
         <br/>
         <input type="submit"/>
       </form>
+      <button onclick="deleteComments()"> deleteComments</button>
 
     </div>
   </body>
