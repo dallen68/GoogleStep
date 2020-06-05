@@ -26,7 +26,7 @@ function getComments() {
 }
 
 function deleteComments() {
-    fetch('/delete-comment', {method: 'POST'});
+    fetch('/delete-comments', {method: 'POST'});
     console.log("it made it here");
     getComments();
 }
