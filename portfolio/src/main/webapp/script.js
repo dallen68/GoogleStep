@@ -14,7 +14,7 @@
 
 function getComments() {
     var commentCount = document.getElementById('commentCount').value;
-    fetch('/data?count='+ commentCount).then(response => response.json()).then((comment) => {
+    fetch('/comments?count='+ commentCount).then(response => response.json()).then((comment) => {
         const commentEl = document.getElementById('comments');
         console.log(comment);
         console.log(commentCount);
