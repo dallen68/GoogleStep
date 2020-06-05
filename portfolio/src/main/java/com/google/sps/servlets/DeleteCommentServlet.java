@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.lang.Integer;
 
-@WebServlet("/delete-comment")
+@WebServlet("/delete-comments")
 public class DeleteCommentServlet extends HttpServlet {
 
   @Override
