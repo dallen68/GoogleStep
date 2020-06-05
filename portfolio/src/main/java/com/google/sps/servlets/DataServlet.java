@@ -31,7 +31,7 @@ import java.lang.Integer;
 import java.util.List;
 
 /**Servlet that handles comments **/
-@WebServlet("/data")
+@WebServlet("/comments")
 public class DataServlet extends HttpServlet {
     
   @Override
