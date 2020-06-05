@@ -30,8 +30,7 @@ import java.util.ArrayList;
 import java.lang.Integer;
 import java.util.List;
 
-
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/**Servlet that handles comments **/
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
     
