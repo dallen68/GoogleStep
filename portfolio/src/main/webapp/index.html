@@ -27,6 +27,13 @@
         <input type="number" id="commentCount" name="commentCount" value="2" min="0" onchange="getComments()">
         <h1 id="comment-header">Leave a comment below!</h1>
         <ul id="comments"></ul>
+        <select id="language" onchange="getComments()">
+            <option value="en">English</option>
+            <option value="zh">Chinese</option>
+            <option value="es">Spanish</option>
+            <option value="hi">Hindi</option>
+            <option value="ar">Arabic</option>
+        </select>
 
         <form action="/comments" method="POST">
             <p>Comment:</p>

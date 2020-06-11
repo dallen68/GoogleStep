@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.TranslateOptions;
+import com.google.cloud.translate.Translation;
 import com.google.gson.Gson;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -44,15 +47,22 @@ public class DataServlet extends HttpServlet {
     int count = Integer.parseInt(request.getParameter("count"));
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
-      
+    
+    String languageCode = request.getParameter("languageCode");
     //Iterate through query results and add entities to List
     List<String> comments = new ArrayList<>();
     int counter = 0;
     for (Entity entity : results.asIterable()) {
         if (counter < count) {
             String comment = (String) entity.getProperty("comment");
+            //Translate comment to requested language
+            Translate translate = TranslateOptions.getDefaultInstance().getService();
+            Translation translation =
+            translate.translate(comment, Translate.TranslateOption.targetLanguage(languageCode));
+            String translatedText = translation.getTranslatedText();
+
             String email = (String) entity.getProperty("email");
-            comments.add(email + ":" + comment);
+            comments.add(email + ":" + translatedText);
             counter++;
         }
       

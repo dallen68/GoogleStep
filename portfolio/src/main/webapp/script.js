@@ -34,8 +34,9 @@ function checkLoginStatus() {
 }
 function getComments() {
     var commentCount = document.getElementById('commentCount').value;
+    var translateCode = document.getElementById('language').value;
     
-    fetch('/comments?count='+ commentCount).then(response => response.json()).then((comment) => {
+    fetch('/comments?count='+ commentCount +'&languageCode='+ translateCode).then(response => response.json()).then((comment) => {
         const commentEl = document.getElementById('comments');
         console.log(comment);
         console.log(commentCount);
