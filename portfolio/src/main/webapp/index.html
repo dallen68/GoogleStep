@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body class="body" onload="getComments()">
+  <body class="body" onload="checkLoginStatus(); getComments()">
       <div class="navigationbar">
           <a href="index.html">Home</a>
           <a>About Me</a>
@@ -23,17 +23,23 @@
       <h1>My Portfolio.</h1>
       <p>This is Dante Allen's portfolio.Hello</p>
       <img class="picture" src ="images/DanteGoogle.jpg">
-      <input type="number" id="commentCount" name="commentCount" value="2" min="0" onchange="getComments()">
-      <h1 id="comment-header">Leave a comment below!</h1>
-      <ul id="comments"></ul>
+      <div id="commentSection">
+        <input type="number" id="commentCount" name="commentCount" value="2" min="0" onchange="getComments()">
+        <h1 id="comment-header">Leave a comment below!</h1>
+        <ul id="comments"></ul>
 
-      <form action="/comments" method="POST">
-        <p>Comment:</p>
-        <textarea name="comment"> </textarea>
-        <br/>
-        <input type="submit"/>
-      </form>
-      <button onclick="deleteComments()"> deleteComments</button>
+        <form action="/comments" method="POST">
+            <p>Comment:</p>
+            <textarea name="comment"> </textarea>
+            <br/>
+            <input type="submit"/>
+        </form>
+        <button onclick="deleteComments()"> deleteComments</button>
+      </div>
+
+      <div id="loginButton">
+          
+      </div>
 
     </div>
   </body>

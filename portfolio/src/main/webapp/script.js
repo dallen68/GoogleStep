@@ -12,8 +12,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+function checkLoginStatus() {
+    fetch('/login').then(response => response.text()).then((status) => {
+        console.log(status);
+        var statusArr = status.split(",",2);
+        console.log(statusArr[1]);
+        const booleanString = "true";
+        if(statusArr[0].localeCompare(booleanString)==0) {
+            document.getElementById('commentSection').style.visibility = "visible";
+            document.getElementById('loginButton').innerHTML =
+            "<p>Logout <a href=\"" + statusArr[1] + "\">here</a>.</p>";
+            console.log("you are logged in");
+        } else {
+            document.getElementById('commentSection').style.visibility = "hidden";
+            document.getElementById('loginButton').innerHTML =
+            "<p>Login <a href=\"" + statusArr[1] + "\">here</a>.</p>";
+            console.log("you need to log in");
+        }
+        
+    });
+}
 function getComments() {
     var commentCount = document.getElementById('commentCount').value;
+    
     fetch('/comments?count='+ commentCount).then(response => response.json()).then((comment) => {
         const commentEl = document.getElementById('comments');
         console.log(comment);

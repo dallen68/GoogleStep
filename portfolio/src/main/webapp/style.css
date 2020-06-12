@@ -8,15 +8,17 @@
 
 }
 .content {
-  margin-left: 100px;
-  margin-right: auto;
-  width: 650px;
-  display: block;
+    margin-left: 100px;
+    margin-right: auto;
+    width: 650px;
+    display: block;
 }
-
+#commentSection {
+    visibility: visible;
+}
 #greeting-container {
-  margin-top: 20px;
-  display: block
+    margin-top: 20px;
+    display: block
 }
 .picture {
     max-width: 50%;

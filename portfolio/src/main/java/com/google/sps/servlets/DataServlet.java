@@ -21,6 +21,8 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -49,7 +51,8 @@ public class DataServlet extends HttpServlet {
     for (Entity entity : results.asIterable()) {
         if (counter < count) {
             String comment = (String) entity.getProperty("comment");
-            comments.add(comment);
+            String email = (String) entity.getProperty("email");
+            comments.add(email + ":" + comment);
             counter++;
         }
       
@@ -64,10 +67,13 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       String textComment = request.getParameter("comment");
       long timestamp = System.currentTimeMillis();
+      UserService userService = UserServiceFactory.getUserService();
+      String email = userService.getCurrentUser().getEmail();
 
       Entity commentEntity = new Entity("Comment");
       commentEntity.setProperty("comment", textComment);
       commentEntity.setProperty("timestamp", timestamp);
+      commentEntity.setProperty("email", email);
       
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commentEntity);
