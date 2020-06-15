@@ -25,17 +25,16 @@ public class LoginServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
       response.setContentType("text/html");
-      PrintWriter out = response.getWriter();
+      PrintWriter responseWriter = response.getWriter();
       UserService userService = UserServiceFactory.getUserService();
     // If user is not logged in, show a login form (could also redirect to a login page)
     if (userService.isUserLoggedIn()) {
         String logoutUrl = userService.createLogoutURL("/index.html");
         String email = userService.getCurrentUser().getEmail();
-        out.println("true," + logoutUrl + "," + email);
-        //response.sendRedirect("index.html");
+        responseWriter.println("true," + logoutUrl + "," + email);
     } else {
         String loginUrl = userService.createLoginURL("/index.html");
-        out.println("false," + loginUrl);
+        responseWriter.println("false," + loginUrl);
     }
   }
 }
