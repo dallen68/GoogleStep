@@ -55,14 +55,13 @@ public class DataServlet extends HttpServlet {
     for (Entity entity : results.asIterable()) {
         if (counter < count) {
             String comment = (String) entity.getProperty("comment");
-            //Translate comment to requested language
+            // Translate comment to requested language
             Translate translate = TranslateOptions.getDefaultInstance().getService();
             Translation translation =
             translate.translate(comment, Translate.TranslateOption.targetLanguage(languageCode));
-            String translatedText = translation.getTranslatedText();
 
             String email = (String) entity.getProperty("email");
-            comments.add(email + ":" + translatedText);
+            comments.add(email + ":" + translation.getTranslatedText());
             counter++;
         }
       
