@@ -27,7 +27,6 @@ public class LoginServlet extends HttpServlet {
       response.setContentType("text/html");
       PrintWriter responseWriter = response.getWriter();
       UserService userService = UserServiceFactory.getUserService();
-    // If user is not logged in, show a login form (could also redirect to a login page)
     if (userService.isUserLoggedIn()) {
         String logoutUrl = userService.createLogoutURL("/index.html");
         String email = userService.getCurrentUser().getEmail();
